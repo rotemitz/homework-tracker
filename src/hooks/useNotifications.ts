@@ -6,7 +6,8 @@ const NOTIFICATION_MINUTE = 0;
 
 export function useNotifications(homework: Homework[], subjects: Subject[]) {
     const notificationSentToday = useRef(false);
-    const permissionGranted = useRef(Notification.permission === 'granted');
+    const isSupported = typeof window !== 'undefined' && 'Notification' in window;
+    const permissionGranted = useRef(isSupported && Notification.permission === 'granted');
 
     // Request permission on first load
     const requestPermission = useCallback(async () => {
