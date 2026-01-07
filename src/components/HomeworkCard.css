@@ -1,0 +1,105 @@
+.homework-card {
+    background: var(--bg-card);
+    border-radius: var(--radius-xl);
+    padding: var(--space-lg);
+    box-shadow: var(--shadow-md);
+    border-right: 5px solid var(--primary);
+    transition: all var(--transition-normal);
+    animation: slideIn 0.3s ease;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateX(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.homework-card:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-xl);
+}
+
+.homework-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: var(--space-sm);
+    gap: var(--space-md);
+}
+
+.homework-subject {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    font-weight: 600;
+    font-size: 1.1rem;
+}
+
+.subject-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: var(--radius-full);
+    flex-shrink: 0;
+}
+
+.homework-due-date {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    white-space: nowrap;
+}
+
+.homework-due-date.urgent {
+    color: var(--danger);
+    font-weight: 600;
+}
+
+.homework-due-date.soon {
+    color: var(--secondary);
+    font-weight: 500;
+}
+
+.homework-description {
+    color: var(--text-secondary);
+    margin-bottom: var(--space-md);
+    white-space: pre-wrap;
+}
+
+.homework-actions {
+    display: flex;
+    gap: var(--space-sm);
+    justify-content: flex-end;
+}
+
+.homework-card.archived {
+    opacity: 0.8;
+    border-right-color: var(--success);
+}
+
+.homework-card.archived .homework-subject {
+    text-decoration: line-through;
+    color: var(--text-secondary);
+}
+
+@media (max-width: 600px) {
+    .homework-card-header {
+        flex-direction: column;
+        gap: var(--space-sm);
+    }
+
+    .homework-actions {
+        justify-content: stretch;
+    }
+
+    .homework-actions .btn {
+        flex: 1;
+    }
+}
