@@ -87,7 +87,7 @@ export function SubjectsManager({ subjects, onAdd, onDelete }: SubjectsManagerPr
                     </div>
                     <button
                         type="submit"
-                        className="btn btn-primary btn-icon-only"
+                        className="btn btn-success btn-icon-only"
                         disabled={isSubmitting}
                     >
                         ➕

@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useFirestore } from './hooks/useFirestore';
+import { useNotifications } from './hooks/useNotifications';
 import { Modal } from './components/Modal';
 import { HomeworkCard } from './components/HomeworkCard';
 import { HomeworkForm } from './components/HomeworkForm';
@@ -22,10 +23,19 @@ function App() {
     deleteHomework
   } = useFirestore();
 
+  // Initialize notifications
+  const { permission, requestPermission, isSupported } = useNotifications(homework, subjects);
+  const [showNotificationBanner, setShowNotificationBanner] = useState(true);
+
   const [isHomeworkModalOpen, setIsHomeworkModalOpen] = useState(false);
   const [isSubjectsModalOpen, setIsSubjectsModalOpen] = useState(false);
   const [isArchiveModalOpen, setIsArchiveModalOpen] = useState(false);
   const [editingHomework, setEditingHomework] = useState<Homework | null>(null);
+
+  const handleEnableNotifications = async () => {
+    await requestPermission();
+    setShowNotificationBanner(false);
+  };
 
   const handleOpenAddHomework = () => {
     setEditingHomework(null);
@@ -87,6 +97,21 @@ function App() {
           </nav>
         </div>
       </header>
+
+      {/* Notification Permission Banner */}
+      {isSupported && permission === 'default' && showNotificationBanner && (
+        <div className="notification-banner">
+          <span>🔔 רוצה לקבל תזכורות יומיות על שיעורי בית?</span>
+          <div className="notification-banner-actions">
+            <button className="btn btn-primary btn-small" onClick={handleEnableNotifications}>
+              אשר התראות
+            </button>
+            <button className="btn btn-ghost btn-small" onClick={() => setShowNotificationBanner(false)}>
+              לא עכשיו
+            </button>
+          </div>
+        </div>
+      )}
 
       {/* Main Content */}
       <main className="main-content">

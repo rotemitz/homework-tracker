@@ -317,3 +317,30 @@ body {
     margin: 0;
   }
 }
+
+/* ===== Notification Banner ===== */
+.notification-banner {
+  background: var(--bg-card);
+  border-radius: var(--radius-xl);
+  padding: var(--space-md) var(--space-lg);
+  margin-bottom: var(--space-lg);
+  box-shadow: var(--shadow-md);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-md);
+  flex-wrap: wrap;
+  border-right: 4px solid var(--secondary);
+}
+
+.notification-banner-actions {
+  display: flex;
+  gap: var(--space-sm);
+}
+
+@media (max-width: 600px) {
+  .notification-banner {
+    flex-direction: column;
+    text-align: center;
+  }
+}
